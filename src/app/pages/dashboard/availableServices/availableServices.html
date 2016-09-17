@@ -1,0 +1,14 @@
+<div class="row available-services">
+
+  <ba-card *ngFor="let service of services" class="as-item-container col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
+
+    <div class="as-item">
+      <div class="description">
+        <div>{{ service.description }}</div>
+        <div class="description-stats">{{ service.stats }}</div>
+      </div>
+      <i class="as-icon i-{{ service.icon }}"></i>
+    </div>
+
+  </ba-card>
+</div>
