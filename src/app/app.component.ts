@@ -1,11 +1,22 @@
 import './app.loader.ts';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, provide, Provider } from '@angular/core';
 import { GlobalState } from './global.state';
 import { BaThemeConfigProvider, BaThemeConfig } from './theme';
-import { Http } from '@angular/http';
+import { HTTP_PROVIDERS } from '@angular/http';
 import { BaThemeRun } from './theme/directives';
+import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG  }
+from 'angular-2-local-storage';
 import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
 import { layoutPaths } from './theme/theme.constants';
+
+let localStorageServiceConfig = {
+    prefix: 'investor-analytics',
+    storageType: 'sessionStorage'
+};
+
+const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CONFIG, {
+    useValue: localStorageServiceConfig
+});
 
 /*
  * App Component
@@ -15,7 +26,9 @@ import { layoutPaths } from './theme/theme.constants';
   selector: 'app',
   pipes: [],
   directives: [BaThemeRun],
-  providers: [BaThemeConfigProvider, BaThemeConfig, BaImageLoaderService, BaThemeSpinner, Http],
+  providers: [BaThemeConfigProvider, BaThemeConfig, BaImageLoaderService, 
+  BaThemeSpinner, HTTP_PROVIDERS,
+  LocalStorageService, LOCAL_STORAGE_CONFIG_PROVIDER],
   encapsulation: ViewEncapsulation.None,
   styles: [require('normalize.css'), require('./app.scss')],
   template: `
@@ -25,7 +38,10 @@ import { layoutPaths } from './theme/theme.constants';
     </main>
   `
 })
+
+
 export class App {
+
 
   isMenuCollapsed: boolean = false;
 
