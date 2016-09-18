@@ -2,6 +2,7 @@ import './app.loader.ts';
 import { Component, ViewEncapsulation, provide, Provider } from '@angular/core';
 import { GlobalState } from './global.state';
 import { BaThemeConfigProvider, BaThemeConfig } from './theme';
+import { Location } from '@angular/common';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { BaThemeRun } from './theme/directives';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG  }
@@ -26,9 +27,9 @@ const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CO
   selector: 'app',
   pipes: [],
   directives: [BaThemeRun],
-  providers: [BaThemeConfigProvider, BaThemeConfig, BaImageLoaderService, 
+  providers: [BaThemeConfigProvider, BaThemeConfig, BaImageLoaderService,
   BaThemeSpinner, HTTP_PROVIDERS,
-  LocalStorageService, LOCAL_STORAGE_CONFIG_PROVIDER],
+  LocalStorageService, LOCAL_STORAGE_CONFIG_PROVIDER, Location],
   encapsulation: ViewEncapsulation.None,
   styles: [require('normalize.css'), require('./app.scss')],
   template: `
