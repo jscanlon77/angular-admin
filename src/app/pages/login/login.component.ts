@@ -4,6 +4,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Http } from '@angular/http';
 import { Location } from '@angular/common';
 import { Routes, RouterModule, Router } from '@angular/router';
+import { AuthenticationService } from './authentication';
+import { IUser }  from './user';
 
 @Component({
   selector: 'login',
@@ -19,7 +21,7 @@ export class Login {
   public password: AbstractControl;
   public submitted: boolean = false;
 
-  constructor(fb: FormBuilder, private _http: Http,
+  constructor(fb: FormBuilder, private _authenticationService: AuthenticationService,
     private _location: Location,
     private _router: Router) {
     this.form = fb.group({
@@ -39,11 +41,14 @@ export class Login {
       // with observables.
       // so if we are not logged in then we need to get the original location that the user 
       // specified.
-      let originalPath = this._location.path;
-      // and if the login details are correct
-      if (originalPath !== null || originalPath !== undefined) {
-        this._router.navigate([originalPath]);
-      }
+      this._authenticationService.login(this.email.value, this.password.value).subscribe(res => {
+          let result = res;
+          let originalPath = this._location.path;
+          // and if the login details are correct
+          if (originalPath !== null || originalPath !== undefined) {
+          this._router.navigate([originalPath]);
+        }
+      });
     }
   }
 }
