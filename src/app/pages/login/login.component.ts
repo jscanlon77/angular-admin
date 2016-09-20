@@ -34,13 +34,6 @@ export class Login {
 
     this.email = this.form.controls['email'];
     this.password = this.form.controls['password'];
-
-    let loginDetails = _localStorage.get('loginDetails');
-    if (loginDetails !== null){
-      // examine them to see if the expiry is ok for the token.
-      this._router.navigate(['']);
-    }
-   
   }
 
   public onSubmit(values: Object): void {
