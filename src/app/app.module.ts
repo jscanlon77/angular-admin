@@ -1,4 +1,4 @@
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef, provide, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -17,6 +17,20 @@ import { AppState } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
+import { AuthorisationGuard } from './authorisation.guard';
+
+import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+ 
+// Create config options (see ILocalStorageServiceConfigOptions) for deets:
+let localStorageServiceConfig = {
+    prefix: 'my-app',
+    storageType: 'localStorage'
+};
+// Provide the config to the service:
+const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CONFIG, {
+    useValue: localStorageServiceConfig
+});
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -44,7 +58,8 @@ const APP_PROVIDERS = [
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    LocalStorageService, LOCAL_STORAGE_CONFIG_PROVIDER, AuthorisationGuard
   ]
 })
 

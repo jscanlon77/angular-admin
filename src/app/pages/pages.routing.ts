@@ -1,9 +1,10 @@
 import { Routes, RouterModule }  from '@angular/router';
 import { Pages } from './pages.component';
+import { AuthorisationGuard } from '../authorisation.guard';
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'login', canActivate: [AuthorisationGuard],
     loadChildren: () => System.import('./login/login.module')
   },
   {

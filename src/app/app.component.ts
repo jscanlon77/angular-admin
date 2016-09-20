@@ -7,6 +7,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { BaThemeRun } from './theme/directives';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG  }
 from 'angular-2-local-storage';
+
 import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
 import { layoutPaths } from './theme/theme.constants';
 
