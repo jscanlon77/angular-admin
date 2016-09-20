@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, provide, Provider } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { Location } from '@angular/common';
 import { Routes, RouterModule, Router } from '@angular/router';
