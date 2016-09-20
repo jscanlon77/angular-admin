@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, provide, Provider } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 })
 export class Dashboard {
 
-  constructor(private _localStorage: LocalStorageService) {
+  constructor(private _localStorage: LocalStorageService, private _router:Router) {
 
     // So in here we want to redirect the user via navigation if they don't have a token
     // and force them to sign in. and also put some protection against all the other pages
@@ -20,6 +21,9 @@ export class Dashboard {
     if (loginDetails !== null){
       // examine them to see if the expiry is ok for the token.
 
+    }
+    else{
+      this._router.navigate(['login']);
     }
   }
 
