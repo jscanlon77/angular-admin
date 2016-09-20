@@ -1,15 +1,17 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, provide, Provider } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { LocalStorageService } from 'angular-2-local-storage';
-import { Http } from '@angular/http';
+import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+import { HTTP_PROVIDERS } from '@angular/http';
 import { Location } from '@angular/common';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { AuthenticationService } from './authentication';
 import { IUser }  from './user';
 
+
 @Component({
   selector: 'login',
   encapsulation: ViewEncapsulation.None,
+  providers: [AuthenticationService],
   directives: [],
   styles: [require('./login.scss')],
   template: require('./login.html'),
@@ -23,7 +25,8 @@ export class Login {
 
   constructor(fb: FormBuilder, private _authenticationService: AuthenticationService,
     private _location: Location,
-    private _router: Router) {
+    private _router: Router,
+    private _localStorage: LocalStorageService) {
     this.form = fb.group({
       'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -41,13 +44,18 @@ export class Login {
       // with observables.
       // so if we are not logged in then we need to get the original location that the user 
       // specified.
-      this._authenticationService.login(this.email.value, this.password.value).subscribe(res => {
+      let username = this.email.value;
+      let password = this.password.value;
+      this._authenticationService.login(username, password)
+      .map(res => res.json())
+      .subscribe(res => {
           let result = res;
-          let originalPath = this._location.path;
-          // and if the login details are correct
-          if (originalPath !== null || originalPath !== undefined) {
-          this._router.navigate([originalPath]);
-        }
+          // Now stuff the token and the username into the LocalStorageService
+          // so that we can display the username that is logged in.
+          // we will then need to write the mechanism to protect the pages on the routing if
+          // we don't have a token for isLoggedIn.
+          this._localStorage.add('loginDetails', result)
+          this._router.navigate(['']);
       });
     }
   }

@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Http,Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import { HTTP_PROVIDERS, Http, Headers, RequestOptions } from '@angular/http';
+
+@Injectable()
 export class AuthenticationService
 {
-    constructor(private _http: Http)
-    {}
+    constructor(private _http: Http) {
 
-    login(email: string, password: string) {
+    }
+
+    login(email: string, password: string) : Observable<any> {
         let serviceBase = '';
         let getTokenString =
         'grant_type=password&username=' + email + '&password=' + password;
 
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
-        return this._http.post('https://localhost:44300' + 'token', getTokenString)
+        return this._http.post('https://localhost:44300' + '/token', getTokenString)
         .catch(this.handleError);
     }
 
