@@ -36,5 +36,6 @@ export class BaPageTop {
 
   public signOut() {
      this._localStorage.remove('loginDetails');
+
   }
 }

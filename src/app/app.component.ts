@@ -5,8 +5,10 @@ import { BaThemeConfigProvider, BaThemeConfig } from './theme';
 import { Location } from '@angular/common';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { BaThemeRun } from './theme/directives';
+import { AuthorisationGuard } from './authorisation.guard';
 import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
 import { layoutPaths } from './theme/theme.constants';
+
 /*
  * App Component
  * Top Level Component
@@ -16,8 +18,7 @@ import { layoutPaths } from './theme/theme.constants';
   pipes: [],
   directives: [BaThemeRun],
   providers: [BaThemeConfigProvider, BaThemeConfig, BaImageLoaderService,
-  BaThemeSpinner, HTTP_PROVIDERS,
-  Location],
+  BaThemeSpinner, HTTP_PROVIDERS, Location, AuthorisationGuard],
   encapsulation: ViewEncapsulation.None,
   styles: [require('normalize.css'), require('./app.scss')],
   template: `

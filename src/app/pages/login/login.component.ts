@@ -8,6 +8,7 @@ import { AuthenticationService } from './authentication';
 import { IUser } from './user';
 
 
+
 @Component({
   selector: 'login',
   encapsulation: ViewEncapsulation.None,
@@ -27,6 +28,14 @@ export class Login {
     private _location: Location,
     private _router: Router,
     private _localStorage: LocalStorageService) {
+    this.form = fb.group({
+      'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
+    });
+
+    this.email = this.form.controls['email'];
+    this.password = this.form.controls['password'];
+
 
     let loginDetailsResult = this._localStorage.get('loginDetails')
     if (loginDetailsResult !== null) {
@@ -40,9 +49,6 @@ export class Login {
       this.email = this.form.controls['email'];
       this.password = this.form.controls['password'];
     }
-
-
-
   }
 
   public onSubmit(values: Object): void {
@@ -65,7 +71,8 @@ export class Login {
           // we don't have a token for isLoggedIn.
           this._localStorage.add('loginDetails', result)
           this._router.navigate(['']);
-        });
+
+      });
     }
   }
 }
