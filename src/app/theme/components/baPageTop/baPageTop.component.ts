@@ -1,9 +1,10 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-
+import { LocalStorageService } from 'angular-2-local-storage';
 import {GlobalState} from '../../../global.state';
 import {BaProfilePicturePipe} from '../../pipes';
 import {BaMsgCenter} from '../../components/baMsgCenter';
 import {BaScrollPosition} from '../../directives';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ba-page-top',
@@ -18,7 +19,7 @@ export class BaPageTop {
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
 
-  constructor(private _state:GlobalState) {
+  constructor(private _state:GlobalState, private _localStorage: LocalStorageService, private _router: Router) {
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });
@@ -31,5 +32,11 @@ export class BaPageTop {
 
   public scrolledChanged(isScrolled) {
     this.isScrolled = isScrolled;
+  }
+
+  public signOut() {
+     this._localStorage.remove('loginDetails')
+     let loginDetails = this._localStorage.get('loginDetails');
+     //this._router.navigate(['login']);
   }
 }

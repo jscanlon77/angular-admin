@@ -19,6 +19,7 @@ import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+import { AuthorisationGuard } from './authorisation.guard';
  
 // Create config options (see ILocalStorageServiceConfigOptions) for deets:
 let localStorageServiceConfig = {
@@ -58,7 +59,7 @@ const APP_PROVIDERS = [
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    LocalStorageService, LOCAL_STORAGE_CONFIG_PROVIDER
+    LocalStorageService, LOCAL_STORAGE_CONFIG_PROVIDER, AuthorisationGuard
   ]
 })
 

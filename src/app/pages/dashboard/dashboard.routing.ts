@@ -1,5 +1,5 @@
 import { Routes, RouterModule }  from '@angular/router';
-import { AuthorisationGuard } from '../authorisation-guard';
+import { AuthorisationGuard } from '../../authorisation.guard';
 import { Dashboard } from './dashboard.component';
 
 // noinspection TypeScriptValidateTypes

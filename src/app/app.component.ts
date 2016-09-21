@@ -7,18 +7,9 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { BaThemeRun } from './theme/directives';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG  }
 from 'angular-2-local-storage';
-import { AuthorisationGuard } from './authorisation-guard';
+import { AuthorisationGuard } from './authorisation.guard';
 import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
 import { layoutPaths } from './theme/theme.constants';
-
-let localStorageServiceConfig = {
-    prefix: 'investor-analytics',
-    storageType: 'sessionStorage'
-};
-
-const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CONFIG, {
-    useValue: localStorageServiceConfig
-});
 
 /*
  * App Component
@@ -29,8 +20,7 @@ const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CO
   pipes: [],
   directives: [BaThemeRun],
   providers: [BaThemeConfigProvider, BaThemeConfig, BaImageLoaderService,
-  BaThemeSpinner, HTTP_PROVIDERS,
-  LocalStorageService, LOCAL_STORAGE_CONFIG_PROVIDER, Location, AuthorisationGuard],
+  BaThemeSpinner, HTTP_PROVIDERS, Location, AuthorisationGuard],
   encapsulation: ViewEncapsulation.None,
   styles: [require('normalize.css'), require('./app.scss')],
   template: `
