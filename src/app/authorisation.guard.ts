@@ -16,7 +16,10 @@ export class AuthorisationGuard implements CanActivate {
     if (loginDetails !== null){
       return true;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> origin/master
     this.router.navigate(['login']);
     return false;
   }

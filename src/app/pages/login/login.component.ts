@@ -5,7 +5,8 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication';
-import { IUser }  from './user';
+import { IUser } from './user';
+
 
 
 @Component({
@@ -34,6 +35,20 @@ export class Login {
 
     this.email = this.form.controls['email'];
     this.password = this.form.controls['password'];
+
+
+    let loginDetailsResult = this._localStorage.get('loginDetails')
+    if (loginDetailsResult !== null) {
+      this._router.navigate(['']);
+    } else {
+      this.form = fb.group({
+        'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+        'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
+      });
+
+      this.email = this.form.controls['email'];
+      this.password = this.form.controls['password'];
+    }
   }
 
   public onSubmit(values: Object): void {
@@ -47,8 +62,8 @@ export class Login {
       let username = this.email.value;
       let password = this.password.value;
       this._authenticationService.login(username, password)
-      .map(res => res.json())
-      .subscribe(res => {
+        .map(res => res.json())
+        .subscribe(res => {
           let result = res;
           // Now stuff the token and the username into the LocalStorageService
           // so that we can display the username that is logged in.
@@ -56,6 +71,7 @@ export class Login {
           // we don't have a token for isLoggedIn.
           this._localStorage.add('loginDetails', result)
           this._router.navigate(['']);
+
       });
     }
   }

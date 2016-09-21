@@ -17,6 +17,20 @@ import { AppState } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
+import { AuthorisationGuard } from './authorisation.guard';
+
+import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+ 
+// Create config options (see ILocalStorageServiceConfigOptions) for deets:
+let localStorageServiceConfig = {
+    prefix: 'my-app',
+    storageType: 'localStorage'
+};
+// Provide the config to the service:
+const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CONFIG, {
+    useValue: localStorageServiceConfig
+});
+
 
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
 import { AuthorisationGuard } from './authorisation.guard';
