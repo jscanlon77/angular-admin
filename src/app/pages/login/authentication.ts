@@ -9,7 +9,7 @@ export class AuthenticationService
 
     }
 
-    login(email: string, password: string) : Observable<any> {
+    login(email: string, password: string) : Observable<[string, string]> {
         let serviceBase = '';
         let getTokenString =
         'grant_type=password&username=' + email + '&password=' + password;

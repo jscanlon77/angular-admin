@@ -3,15 +3,24 @@
   <a (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
 
   <div class="user-profile clearfix">
+    
     <div class="dropdown al-user-profile">
+      
       <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">
         <img src="{{ ( 'Nasta' | baProfilePicture ) }}">
       </a>
+     
+      
       <ul class="dropdown-menu top-dropdown-menu profile-dropdown" aria-labelledby="user-profile-dd">
         <li class="dropdown-item"><a href class="signout" (click)="signOut()"><i class="fa fa-power-off"></i>Sign out</a></li>
       </ul>
     </div>
-    <ba-msg-center></ba-msg-center>
+    <div class="welcome-logged-in" *ngIf="showUsername">
+      <h4>Welcome  {{ userName }}!</h4>&nbsp;
+    </div>
+     
+    
+    <!--<ba-msg-center></ba-msg-center>-->
   </div>
 </div>
 

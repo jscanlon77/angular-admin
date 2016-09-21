@@ -62,14 +62,13 @@ export class Login {
       let username = this.email.value;
       let password = this.password.value;
       this._authenticationService.login(username, password)
-        .map(res => res.json())
         .subscribe(res => {
           let result = res;
           // Now stuff the token and the username into the LocalStorageService
           // so that we can display the username that is logged in.
           // we will then need to write the mechanism to protect the pages on the routing if
           // we don't have a token for isLoggedIn.
-          this._localStorage.add('loginDetails', result)
+          this._localStorage.add('loginDetails', result);
           this._router.navigate(['']);
 
       });
