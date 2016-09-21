@@ -54,7 +54,7 @@ To run a local copy in development mode, execute:
 ```bash
 npm start
 ```
-Go to http://0.0.0.0:3000 or http://localhost:3000 in your browser.
+Go to http://0.0.0.0:3001 or http://localhost:3001 in your browser.
 
 
 To run the local copy in production mode and build the sources, execute:

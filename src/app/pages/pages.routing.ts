@@ -4,7 +4,7 @@ import { AuthorisationGuard } from '../authorisation.guard';
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
-    path: 'login', canActivate: [AuthorisationGuard],
+    path: 'login',
     loadChildren: () => System.import('./login/login.module')
   },
   {
