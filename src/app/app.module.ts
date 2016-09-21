@@ -32,20 +32,6 @@ const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CO
 });
 
 
-import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
-import { AuthorisationGuard } from './authorisation.guard';
- 
-// Create config options (see ILocalStorageServiceConfigOptions) for deets:
-let localStorageServiceConfig = {
-    prefix: 'my-app',
-    storageType: 'localStorage'
-};
-// Provide the config to the service:
-const LOCAL_STORAGE_CONFIG_PROVIDER: Provider = provide(LOCAL_STORAGE_SERVICE_CONFIG, {
-    useValue: localStorageServiceConfig
-});
-
-
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,

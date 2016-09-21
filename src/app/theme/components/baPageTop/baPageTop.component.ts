@@ -37,6 +37,5 @@ export class BaPageTop {
   public signOut() {
      this._localStorage.remove('loginDetails')
      let loginDetails = this._localStorage.get('loginDetails');
-     //this._router.navigate(['login']);
   }
 }
