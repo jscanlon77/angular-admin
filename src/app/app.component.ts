@@ -5,8 +5,6 @@ import { BaThemeConfigProvider, BaThemeConfig } from './theme';
 import { Location } from '@angular/common';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { BaThemeRun } from './theme/directives';
-import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG  }
-from 'angular-2-local-storage';
 import { AuthorisationGuard } from './authorisation.guard';
 import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
 import { layoutPaths } from './theme/theme.constants';
