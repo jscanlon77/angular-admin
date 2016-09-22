@@ -9,10 +9,9 @@ export class DataTreatmentService {
 
   }
 
-
-  //         var getDataTreatmentOptions = function() {
-//             var dataTreatmentOptions = ["INSTITUTION", "FUND", "HYBRID"];
-//             return dataTreatmentOptions;
-//         }
+  getEquities(): Observable<any> {
+    var dataTreatmentOptions = ["INSTITUTION", "FUND", "HYBRID"];
+    return Observable.create(dataTreatmentOptions)
+  }
 
 }
