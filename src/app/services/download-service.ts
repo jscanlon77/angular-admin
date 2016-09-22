@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions, BrowserXhr } from '@angular/http';
-
+import filesaver = require('../../filesaver');
 
 @Injectable()
 export class DownloadService {
@@ -26,7 +26,7 @@ export class DownloadService {
             var fileNameAndExtension = fileName + fileExtension;
             (blob, fileNameAndExtension);
             
-            //saveAs(blob, fileNameAndExtension);
+            filesaver.saveAs(blob, fileNameAndExtension);
             blob.msClose();
         } catch (e) {
             

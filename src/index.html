@@ -16,7 +16,7 @@
 
   <!-- base url -->
   <base href="<%= webpackConfig.metadata.baseUrl %>">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
 </head>
 
 <body>
@@ -30,6 +30,7 @@
 <% if (webpackConfig.metadata.isDevServer && webpackConfig.metadata.HMR !== true) { %>
 <!-- Webpack Dev Server reload -->
 <script src="/webpack-dev-server.js"></script>
+
 <% } %>
 
 <link

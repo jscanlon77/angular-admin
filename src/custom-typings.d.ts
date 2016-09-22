@@ -110,6 +110,11 @@ interface ErrorStackTraceLimit {
   stackTraceLimit: number;
 }
 
+declare module 'filesaver' {
+    var saveAs: any;
+    export = saveAs;
+}
+
 
 // Extend typings
 interface NodeRequire extends WebpackRequire {}
