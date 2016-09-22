@@ -25,7 +25,8 @@ export class DownloadService {
             var blob = new Blob([base64Array], { type: actualContentType });
             var fileNameAndExtension = fileName + fileExtension;
             (blob, fileNameAndExtension);
-            saveAs(blob, fileNameAndExtension);
+            
+            //saveAs(blob, fileNameAndExtension);
             blob.msClose();
         } catch (e) {
             
