@@ -1,11 +1,14 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {EmailValidator, EqualPasswordsValidator} from '../../theme/validators';
+import { RegistrationModel } from '../../model/registrationModel';
+import { RegistrationService } from './register.service';
 
 @Component({
   selector: 'register',
   encapsulation: ViewEncapsulation.None,
   directives: [],
+  providers:[ RegistrationService],
   styles: [require('./register.scss')],
   template: require('./register.html'),
 })
@@ -41,8 +44,9 @@ export class Register {
   public onSubmit(values:Object):void {
     this.submitted = true;
     if (this.form.valid) {
-      // your code goes here
-      // console.log(values);
+      
+      let registrationModel = new RegistrationModel(this.email.value, this.password.value, this.repeatPassword.value);
+
     }
   }
 }
