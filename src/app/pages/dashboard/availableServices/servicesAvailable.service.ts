@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { BaThemeConfigProvider, colorHelper } from '../../../theme';
 import { Http } from '@angular/http';
+import { HealthCheckService } from '../../services/healthcheck-service';
+import { ServiceDetail} from '../../model/service-detail';
 
 @Injectable()
 export class ServicesAvailableService {
 
-  constructor(private _baConfig:BaThemeConfigProvider, private _http:Http) {
+  constructor(private _healthCheckService : HealthCheckService) {
   }
 
-  getData() {
-    // make an observable http call to get the status of all
-    // the Services
-    // such as Connected Service, FactSetService, Morningstar Service
-    // etc.
-    // return as a JSON array
-    //this._http.
-        return new Array<Object>();
+  getAvailableServices() : Array<ServiceDetail> {
+    
+        this._healthCheckService.healthcheck().subscribe(res=>res {
+            
+        });
+        return availableServices;
     }
 }

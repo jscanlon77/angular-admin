@@ -1,20 +1,22 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ServicesAvailableService } from './servicesAvailable.service';
+import { HealthCheckService } from '../../services/healthcheck-service';
+import { ServiceDetail} from '../../model/service-detail';
 
 @Component({
   selector: 'available-services',
   encapsulation: ViewEncapsulation.None,
-  providers: [ServicesAvailableService],
+  providers: [ServicesAvailableService, HealthCheckService],
   styles: [require('./availableServices.scss')],
   template: require('./availableServices.html')
 })
 
 export class AvailableServices {
 
-  public availableServices: Array<Object>;
+  public availableServices: Array<ServiceDetail>;
   private _init = false;
 
   constructor(private _servicesAvailableService: ServicesAvailableService) {
-    this.availableServices = this._servicesAvailableService.getData();
+    this.availableServices = this._servicesAvailableService.getAvailableServices();
   }
 }
