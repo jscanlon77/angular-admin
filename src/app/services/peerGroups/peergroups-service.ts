@@ -2,33 +2,34 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions } from '@angular/http';
 import { SavePeerGroupModel } from '../../model/savePeerGroupModel';
+import { GlobalService } from '../../globals'
 
 
 @Injectable()
 export class PeerGroupsService {
   private serviceBase = 'https://localhost:44300';
-  constructor(private _http: Http) {
+  constructor(private _http: Http, private _globalService:GlobalService) {
 
   }
 
   getPeerGroupsByEquity(equityId: string): Observable<any> {
     
-    return this._http.get(this.serviceBase + 'api/staticdata/peergroups/' + equityId)
+    return this._http.get(this._globalService.serviceBase + 'api/staticdata/peergroups/' + equityId)
       .catch(this.handleError);
   }
 
   getPeerGroupsByUserId(username:string) {
-     return this._http.get(this.serviceBase + 'api/staticdata/peergroupbyuser/' + username)
+     return this._http.get(this._globalService + 'api/staticdata/peergroupbyuser/' + username)
      .catch(this.handleError);
   }
 
   getPeerGroupsByEquityAndUserId(username:string, equityId:string) {
-     return this._http.get(this.serviceBase + 'api/staticdata/peergroups/' + username + '/' + equityId)
+     return this._http.get(this._globalService.serviceBase + 'api/staticdata/peergroups/' + username + '/' + equityId)
      .catch(this.handleError);
   }
 
   savePeerGroupDetails(savePeerGroupModel: SavePeerGroupModel) {
-     return this._http.post(this.serviceBase + 'api/staticdata/savePeerGroupDetails', savePeerGroupModel)
+     return this._http.post(this._globalService.serviceBase + 'api/staticdata/savePeerGroupDetails', savePeerGroupModel)
      .catch(this.handleError);
   }
 

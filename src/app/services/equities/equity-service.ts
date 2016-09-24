@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions } from '@angular/http';
+import { GlobalService } from '../../globals'
 
 @Injectable()
 export class EquityService {
-  private serviceBase = 'https://localhost:44300';
-  constructor(private _http: Http) {
+  constructor(private _http: Http, private _globalService:GlobalService) {
 
   }
 
   getEquities(): Observable<any> {
     
-    return this._http.get(this.serviceBase + 'api/staticdata/equitytickers')
+    return this._http.get(_globalService.serviceBase + 'api/staticdata/equitytickers')
       .catch(this.handleError);
   }
 
   getEquityListByTerm(term:string, interval:string) {
-     return this._http.get(this.serviceBase + 'api/staticdata/equitytickersbyterm/' + term + '/' + interval)
+     return this._http.get(_globalService.serviceBase + 'api/staticdata/equitytickersbyterm/' + term + '/' + interval)
      .catch(this.handleError);
   }
 

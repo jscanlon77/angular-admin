@@ -1,1 +1,6 @@
-export var serviceHost = 'https://localhost:44300';
+export class GlobalService
+{
+    public serviceHost:string = 'https://localhost:44300';
+}
+
+
