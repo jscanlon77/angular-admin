@@ -12,7 +12,7 @@ export class HealthCheckService {
 
   healthcheck(): Observable<Array<ServiceDetail>> {
     
-    return this._http.get(this._globalService.serviceHost + '/api/healthcheck/services')
+    return this._http.get(this._globalService.serviceHost + '/api/healthcheck/serviceStatus')
       .map(ref => ref.json())
       .catch(this.handleError);
   }
