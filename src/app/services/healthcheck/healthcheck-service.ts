@@ -10,9 +10,9 @@ export class HealthCheckService {
 
   }
 
-  healthcheck(): Observable<Array<ServiceDetail>> {
+  healthcheck(userName:string): Observable<Array<ServiceDetail>> {
     
-    return this._http.get(this._globalService.serviceHost + '/api/healthcheck/serviceStatus')
+    return this._http.get(this._globalService.serviceHost + '/api/healthcheck/serviceStatus/' + userName)
       .map(ref => ref.json())
       .catch(this.handleError);
   }

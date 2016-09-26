@@ -10,9 +10,9 @@ export class ServicesAvailableService {
   constructor(private _healthCheckService : HealthCheckService) {
   }
 
-  getAvailableServices() : Array<ServiceDetail> {
+  getAvailableServices(username:string) : Array<ServiceDetail> {
     
-        this._healthCheckService.healthcheck().subscribe(res=> {
+        this._healthCheckService.healthcheck(username).subscribe(res=> {
             return res;
         });
         
