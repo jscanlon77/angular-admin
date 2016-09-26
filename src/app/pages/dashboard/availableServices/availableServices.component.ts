@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ServicesAvailableService } from './servicesAvailable.service';
-import { HealthCheckService } from '../../services/healthcheck-service';
-import { ServiceDetail} from '../../model/service-detail';
+import { HealthCheckService } from '../../../services/healthcheck/healthcheck-service';
+import { ServiceDetail} from '../../../model/serviceDetail';
 
 @Component({
   selector: 'available-services',

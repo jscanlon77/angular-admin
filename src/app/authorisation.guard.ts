@@ -14,6 +14,17 @@ export class AuthorisationGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let loginDetails = this._localStorageService.get('loginDetails');
     if (loginDetails !== null){
+    let expiryDate = new Date(loginDetails[".expires"]);
+    let expiryDateNumber = expiryDate.getTime();
+    let currentDate = Date.now();
+      
+    //this one needs to be there in case our login has expired.
+    if (expiryDateNumber < currentDate)
+    {
+      this._localStorageService.remove('loginDetails');
+      return false;
+    }
+     
       return true;
     }
     

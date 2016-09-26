@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions } from '@angular/http';
 import { GlobalService } from '../../globals'
-import { ServiceDetail} from '../../model/service-detail';
+import { ServiceDetail} from '../../model/serviceDetail';
 
 @Injectable()
 export class HealthCheckService {
@@ -12,7 +12,7 @@ export class HealthCheckService {
 
   healthcheck(): Observable<Array<ServiceDetail>> {
     
-    return this._http.get(_globalService.serviceBase + 'api/healthcheck/services')
+    return this._http.get(this._globalService.serviceHost + '/api/healthcheck/services')
       .map(ref => ref.json())
       .catch(this.handleError);
   }
