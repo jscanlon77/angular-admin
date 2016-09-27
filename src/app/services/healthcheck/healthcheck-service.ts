@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions } from '@angular/http';
 import { GlobalService } from '../../globals'
-import { ServiceDetail} from '../../model/service-detail';
+import { ServiceDetail } from '../../model/serviceDetail';
 
 @Injectable()
 export class HealthCheckService {
-  constructor(private _http: Http, private _globalService:GlobalService) {
+  constructor(private _http: Http, private _globalService: GlobalService) {
 
   }
 
-  healthcheck(): Observable<Array<ServiceDetail>> {
-    
-    return this._http.get(_globalService.serviceBase + 'api/healthcheck/services')
+  healthcheck(userName: string): Observable<Array<ServiceDetail>> {
+
+    return this._http.get(this._globalService.serviceHost + '/api/healthcheck/serviceStatus/' + userName)
       .map(ref => ref.json())
       .catch(this.handleError);
   }
 
-  
+
 
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
