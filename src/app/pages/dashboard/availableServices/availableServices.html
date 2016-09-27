@@ -1,13 +1,16 @@
 <div class="row available-services">
 
-  <ba-card *ngFor="let service of availableServices" class="as-item-container col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
+  <ba-card *ngFor="let service of availableServices" title="{{ service.Name }}" class="as-item-container col-xlg-3 col-lg-3 col-md-6 col-sm-12 col-xs-12">
 
     <div class="as-item">
-      <div class="description">
-        <div>{{ service.description }}</div>
-        <div class="description-stats">{{ service.isAvailable }}</div>
+      <div *ngIf="!service.IsAvailable" class="description">
+        <img src="assets/img/app/status/unavailable.png" alt=""/>
+        DOWN
       </div>
-      <i class="as-icon i-{{ service.icon }}"></i>
+      <div *ngIf="service.IsAvailable" class="description">
+        <img src="assets/img/app/status/available.png" alt=""/>
+        UP
+      </div>
     </div>
 </ba-card>
 </div>

@@ -16,6 +16,7 @@ const routes: Routes = [
     component: Pages,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'current', loadChildren: () => System.import('./currentAnalysis/current-analysis.module') },
       { path: 'dashboard', loadChildren: () => System.import('./dashboard/dashboard.module') },
       { path: 'editors', loadChildren: () => System.import('./editors/editors.module') },
       //{ path: 'components', loadChildren: () => System.import('./components/components.module') }

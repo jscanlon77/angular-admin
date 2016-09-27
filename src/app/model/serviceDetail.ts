@@ -1,11 +1,11 @@
 export class ServiceDetail {
     public serviceName: string;
     public description:  string;
-    public isActivated: boolean;
+    public isAvailable: boolean;
 
-    constructor(_serviceName:string, _description:string, _isActivated:boolean) {
+    constructor(_serviceName:string, _description:string, _isAvailable:boolean) {
         this.serviceName = _serviceName;
         this.description = _description;
-        this.isActivated = _isActivated;
+        this.isAvailable = _isAvailable;
     }
 }
