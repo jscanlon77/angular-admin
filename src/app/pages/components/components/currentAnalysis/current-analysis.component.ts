@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
-
+import { Component, ViewEncapsulation } from '@angular/core';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'current-analysis',
-  pipes: [],
+  encapsulation: ViewEncapsulation.None,
   providers: [],
-  styles: [],
-  template: `<router-outlet></router-outlet>`
+  styles: [require('./current-analysis.scss')],
+  template: require('./current-analysis.html')
 })
+
 export class CurrentAnalysis {
 
-  constructor() {
-  }
+  constructor(
+  private _localStorage: LocalStorageService) {
+    let loginDetails = this._localStorage.get('loginDetails');
+    let userName = loginDetails['userName']
 
-  ngOnInit() {
   }
-
 }

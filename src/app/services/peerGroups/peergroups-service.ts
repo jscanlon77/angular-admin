@@ -14,7 +14,7 @@ export class PeerGroupsService {
 
   getPeerGroupsByEquity(equityId: string): Observable<any> {
     
-    return this._http.get(this._globalService.serviceBase + 'api/staticdata/peergroups/' + equityId)
+    return this._http.get(this._globalService.serviceHost + 'api/staticdata/peergroups/' + equityId)
       .catch(this.handleError);
   }
 
@@ -24,12 +24,12 @@ export class PeerGroupsService {
   }
 
   getPeerGroupsByEquityAndUserId(username:string, equityId:string) {
-     return this._http.get(this._globalService.serviceBase + 'api/staticdata/peergroups/' + username + '/' + equityId)
+     return this._http.get(this._globalService.serviceHost + 'api/staticdata/peergroups/' + username + '/' + equityId)
      .catch(this.handleError);
   }
 
   savePeerGroupDetails(savePeerGroupModel: SavePeerGroupModel) {
-     return this._http.post(this._globalService.serviceBase + 'api/staticdata/savePeerGroupDetails', savePeerGroupModel)
+     return this._http.post(this._globalService.serviceHost + 'api/staticdata/savePeerGroupDetails', savePeerGroupModel)
      .catch(this.handleError);
   }
 
