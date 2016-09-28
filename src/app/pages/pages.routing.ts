@@ -16,10 +16,9 @@ const routes: Routes = [
     component: Pages,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'current', loadChildren: () => System.import('./currentAnalysis/current-analysis.module') },
       { path: 'dashboard', loadChildren: () => System.import('./dashboard/dashboard.module') },
       { path: 'editors', loadChildren: () => System.import('./editors/editors.module') },
-      //{ path: 'components', loadChildren: () => System.import('./components/components.module') }
+      { path: 'components', loadChildren: () => System.import('./components/components.module') },
       { path: 'charts', loadChildren: () => System.import('./charts/charts.module') },
       { path: 'ui', loadChildren: () => System.import('./ui/ui.module') },
       { path: 'forms', loadChildren: () => System.import('./forms/forms.module') },

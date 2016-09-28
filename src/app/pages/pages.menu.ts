@@ -49,7 +49,7 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'current',
+            path: 'current-analysis',
             data: {
               menu: {
                 title: 'Current Analysis',

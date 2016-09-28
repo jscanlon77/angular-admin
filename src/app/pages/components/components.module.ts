@@ -5,7 +5,7 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { routing }       from './components.routing';
 import { Components } from './components.component';
-import { TreeView } from './components/treeView/treeView.component';
+import { CurrentAnalysis } from './components/currentAnalysis/current-analysis.component';
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { TreeView } from './components/treeView/treeView.component';
   ],
   declarations: [
     Components,
-    TreeView
+    CurrentAnalysis
   ]
 })
 export default class ComponentsModule {}

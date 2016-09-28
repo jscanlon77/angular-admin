@@ -5,11 +5,8 @@ import { CurrentAnalysis } from './current-analysis.component';
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
-    path: '', canActivate: [AuthorisationGuard],
-    component: CurrentAnalysis,
-    children: [
-      //{ path: 'treeview', component: TreeViewComponent }
-    ]
+    path: 'current-analysis', canActivate: [AuthorisationGuard],
+    component: CurrentAnalysis
   }
 ];
 
