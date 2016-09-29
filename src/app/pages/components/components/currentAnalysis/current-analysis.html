@@ -5,7 +5,7 @@
                 <div class="form-group row">
                     <label for="tickerSelect" class="col-sm-2 form-control-label">SELECT TICKER:</label>
                     <div class="col-sm-10">
-                        <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
+                        <p-autoComplete [(ngModel)]="equityModel" [suggestions]="results" (completeMethod)="findEquityMatches($event)"></p-autoComplete>
                     </div>
                 </div>
               
