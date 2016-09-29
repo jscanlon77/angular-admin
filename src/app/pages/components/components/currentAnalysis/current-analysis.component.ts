@@ -19,4 +19,8 @@ export class CurrentAnalysis {
     let userName = loginDetails['userName']
     
   }
+
+  save() {
+        // do something..
+    }
 }
