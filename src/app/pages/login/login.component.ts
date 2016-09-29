@@ -4,6 +4,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { Message } from 'primeng/primeng';
 import { AuthenticationService } from './authentication';
 import { IUser } from './user';
 
@@ -23,6 +24,7 @@ export class Login {
   public email: AbstractControl;
   public password: AbstractControl;
   public submitted: boolean = false;
+  private msgs: Message[] = [];
 
   constructor(fb: FormBuilder, private _authenticationService: AuthenticationService,
     private _location: Location,
@@ -65,8 +67,8 @@ export class Login {
         .subscribe(res => {
           let result = res;
           // now convert the body to a dictionary..
-          var loginDetailsBody = JSON.parse(result['_body']);
-          var loginDictionary = <[string,string]>loginDetailsBody
+          let loginDetailsBody = JSON.parse(result['_body']);
+          let loginDictionary = <[string, string]>loginDetailsBody;
           // Now stuff the token and the username into the LocalStorageService
           // so that we can display the username that is logged in.
           // we will then need to write the mechanism to protect the pages on the routing if
@@ -74,7 +76,13 @@ export class Login {
           this._localStorage.add('loginDetails', loginDictionary);
           this._router.navigate(['']);
 
-      });
+        }, error => {
+          this.msgs.push( { severity: 'error',
+          summary: 'Could not connect to server',
+          detail: 'There has been an error connecting to server' }
+          );
+
+        });
     }
   }
 }

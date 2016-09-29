@@ -2,8 +2,8 @@ import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
-
 import { Login } from './login.component';
+import { GrowlModule } from 'primeng/primeng';
 import { routing }       from './login.routing';
 
 
@@ -12,6 +12,7 @@ import { routing }       from './login.routing';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    GrowlModule,
     NgaModule,
     routing
   ],
