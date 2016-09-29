@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, NgModule } from '@angular/core';
 
 import { LocalStorageService } from 'angular-2-local-storage';
-import { ButtonModule } from 'primeng/primeng';
+
 
 @Component({
   selector: 'current-analysis',

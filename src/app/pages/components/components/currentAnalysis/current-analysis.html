@@ -1,11 +1,14 @@
 <div class="widgets">
     <div class="row">
         <div class="col-md-7">
-            <ba-card title="Flat Buttons" baCardClass="with-scroll button-panel">
-                <div class="button-wrapper">
-                    
-                    <p-splitButton label="Save" icon="fa-check" (onClick)="save()" [model]="items"></p-splitButton>
+            <ba-card title="Holders By Institution" baCardClass="with-scroll button-panel">
+                <div class="form-group row">
+                    <label for="tickerSelect" class="col-sm-2 form-control-label">SELECT TICKER:</label>
+                    <div class="col-sm-10">
+                        <p-autoComplete [(ngModel)]="text" [suggestions]="results" (completeMethod)="search($event)"></p-autoComplete>
+                    </div>
                 </div>
+              
             </ba-card>
         </div>
     </div>
