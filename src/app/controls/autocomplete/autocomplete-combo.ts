@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { IgComboComponent } from "./ignite-typings/ignite-angular2";
+import { IgComboComponent } from "../ignite-typings/ignite.angular2";
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic }    from '@angular/platform-browser-dynamic';
 import { FormsModule } from '@angular/forms';

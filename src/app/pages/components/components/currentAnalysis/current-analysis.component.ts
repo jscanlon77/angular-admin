@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { AutoCompleteCombo } from '../../../../controls/autocomplete/autocomplete-combo';
 
 @Component({
   selector: 'current-analysis',
@@ -13,7 +12,7 @@ import { AutoCompleteCombo } from '../../../../controls/autocomplete/autocomplet
 export class CurrentAnalysis {
 
   constructor(
-  private _localStorage: LocalStorageService, private _autoComplete:AutoCompleteCombo) {
+  private _localStorage: LocalStorageService) {
     let loginDetails = this._localStorage.get('loginDetails');
     let userName = loginDetails['userName']
     
