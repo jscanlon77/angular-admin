@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
 import { routing }       from './current-analysis.routing';
 import { CurrentAnalysis } from './current-analysis.component';
+import { SplitButtonModule} from 'primeng/primeng';
+
+
 
 
 
@@ -12,11 +15,12 @@ import { CurrentAnalysis } from './current-analysis.component';
     CommonModule,
     FormsModule,
     NgaModule,
+    SplitButtonModule,
     routing
   ],
   declarations: [
-    CurrentAnalysis],
-  providers: [AutoCompleteCombo ]
+    CurrentAnalysis, ],
+  imports: []
 })
 export default class CurrentAnalysisModule {
 }

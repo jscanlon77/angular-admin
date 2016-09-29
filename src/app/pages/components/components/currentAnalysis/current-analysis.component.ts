@@ -1,11 +1,13 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, NgModule } from '@angular/core';
+
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ButtonModule } from 'primeng/primeng';
 
 @Component({
   selector: 'current-analysis',
   encapsulation: ViewEncapsulation.None,
   providers: [],
-  styles: [require('./current-analysis.scss')],
+  styles: [require('./current-analysis.scss'), require('./buttons.scss')],
   template: require('./current-analysis.html')
 })
 
