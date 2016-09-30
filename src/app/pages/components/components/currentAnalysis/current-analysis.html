@@ -9,14 +9,22 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="button-wrapper">
+                          <button type="button" class="btn btn-success btn-sm" (click)="dt.exportCsv()" style="float:right">Export To Excel</button>
+                     </div>
+                </div>
+                <p></p>
+                <div class="row">
                     <p-dataTable #dt [value]="institutionResults" [(selection)]="selectedInstitutions">
-                        <div class="ui-helper-clearfix">
-                            <button type="button" pButton icon="fa-file-o" iconPos="left" label="Excel" (click)="dt.exportCsv()" style="float:left"></button>
-                        </div>
-                        <header>Current Equity Institution Positions</header>
+
+                        <header>Current Equity Institution Positions
+                            
+                           
+
+                        </header>
                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                         <p-column field="_institutionName" header="Institution" [style]="{'textAlign':'left'}"></p-column>
-                        <p-column field="_position" header="Position" [style]="{'textAlign':'right'}" ></p-column>
+                        <p-column field="_position" header="Position" [style]="{'textAlign':'right'}"></p-column>
                         <p-column field="_price" header="Price" [style]="{'textAlign':'right'}"></p-column>
                     </p-dataTable>
                 </div>
