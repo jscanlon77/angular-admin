@@ -10,12 +10,12 @@
                 </div>
                 <div class="row">
                     <div class="button-wrapper">
-                          <button type="button" class="btn btn-success btn-sm" (click)="dt.exportCsv()" style="float:right">Export To Excel</button>
+                          <button type="button" class="btn btn-success btn-sm" (click)="export(institutionResults)" style="float:right">Export To Excel</button>
                      </div>
                 </div>
                 <p></p>
                 <div class="row">
-                    <p-dataTable #dt [value]="institutionResults" [(selection)]="selectedInstitutions">
+                    <p-dataTable #dt [value]="institutionResults" [(selection)]="selectInstitutions">
 
                         <header>Current Equity Institution Positions
                             

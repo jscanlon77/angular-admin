@@ -34,6 +34,9 @@ const METADATA = webpackMerge(commonConfig.metadata, {
  */
 module.exports = webpackMerge(commonConfig, {
 
+  externals: [
+        {  "./cptable": "var cptable",  "./jszip": "jszip" }],
+
   /**
    * Merged metadata from webpack.common.js for index.html
    *

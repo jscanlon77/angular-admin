@@ -7,6 +7,7 @@ import { routing }       from './components.routing';
 import { Components } from './components.component';
 import { CurrentAnalysis } from './components/currentAnalysis/current-analysis.component';
 import { EquityService } from '../../services/equities/equity-service';
+import { DownloadService } from '../../services/downloads/download-service'
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { EquityService } from '../../services/equities/equity-service';
     CurrentAnalysis
   ],
   providers: [
-    EquityService
+    EquityService,
+    DownloadService
   ]
 })
 export default class ComponentsModule {}

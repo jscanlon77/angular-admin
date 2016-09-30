@@ -116,6 +116,11 @@ declare module 'filesaver' {
 }
 
 
+
+// declare module 'alasql' {
+//   export = alasql;
+// }
+
 // Extend typings
 interface NodeRequire extends WebpackRequire {}
 interface ErrorConstructor extends ErrorStackTraceLimit {}
