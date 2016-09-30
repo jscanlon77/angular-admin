@@ -19,8 +19,7 @@ import { SplitButtonModule} from 'primeng/primeng';
     routing
   ],
   declarations: [
-    CurrentAnalysis, ],
-  imports: []
+    CurrentAnalysis, ]
 })
 export default class CurrentAnalysisModule {
 }

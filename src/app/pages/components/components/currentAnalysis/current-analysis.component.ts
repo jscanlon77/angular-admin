@@ -1,7 +1,10 @@
 import { Component, ViewEncapsulation, NgModule } from '@angular/core';
 import { AutoCompleteModel } from '../../../../model/autoCompleteModel';
+import { InstitutionResultsModel } from '../../../../model/institutionResultsModel';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { EquityService } from '../../../../services/equities/equity-service';
+import { Header, Footer } from 'primeng/primeng';
+
 
 
 @Component({
@@ -15,6 +18,7 @@ import { EquityService } from '../../../../services/equities/equity-service';
 export class CurrentAnalysis {
 
   private results: AutoCompleteModel[];
+  private institutionResults: InstitutionResultsModel[] = new Array();
   private selectedEquityResult: AutoCompleteModel;
   private equityModel: AutoCompleteModel;
   private username:string;
@@ -25,6 +29,9 @@ export class CurrentAnalysis {
     let loginDetails = this._localStorage.get('loginDetails');
     this.username = loginDetails['userName'];
     this.showHolderPositions = false;
+
+    let institutionResult = new InstitutionResultsModel("something", 23.45, 345.45, "1")
+    this.institutionResults.push(institutionResult)
   }
 
   /*

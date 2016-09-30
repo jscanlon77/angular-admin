@@ -8,7 +8,18 @@
                         <p-autoComplete [(ngModel)]="equityModel" [suggestions]="results" (completeMethod)="findEquityMatches($event)"></p-autoComplete>
                     </div>
                 </div>
-              
+                <div class="row">
+                    <p-dataTable #dt [value]="institutionResults" [(selection)]="selectedInstitutions">
+                        <div class="ui-helper-clearfix">
+                            <button type="button" pButton icon="fa-file-o" iconPos="left" label="Excel" (click)="dt.exportCsv()" style="float:left"></button>
+                        </div>
+                        <header>Current Equity Institution Positions</header>
+                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                        <p-column field="_institutionName" header="Institution" [style]="{'textAlign':'left'}"></p-column>
+                        <p-column field="_position" header="Position" [style]="{'textAlign':'right'}" ></p-column>
+                        <p-column field="_price" header="Price" [style]="{'textAlign':'right'}"></p-column>
+                    </p-dataTable>
+                </div>
             </ba-card>
         </div>
     </div>
