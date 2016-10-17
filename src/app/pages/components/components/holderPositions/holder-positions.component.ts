@@ -61,6 +61,12 @@ export class HolderPositions extends ReportingBase {
     })
   }
 
+  historicCheckChanged(event) {
+    if (!this.historicCheck) {
+      this.selectedTenor = this.tenors[0];
+    }
+  }
+
   selectedEquity(event) {
 
     if (event === null) {

@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group row" *ngIf="showHolderPositions">
                     <div class="col-sm-10">
-                        <p-checkbox [(ngModel)]="historicCheck" binary="true" label="Historical Data?"></p-checkbox>
+                        <p-checkbox [(ngModel)]="historicCheck" binary="true" label="Historical Data?" (onChange)="historicCheckChanged($event)"></p-checkbox>
                     </div>
                 </div>
                 <div class="row" *ngIf="historicCheck">

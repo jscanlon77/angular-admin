@@ -12,7 +12,7 @@ export class InstitutionService {
     }
 
     getHoldersByEquityId(equityId: string): Observable<Holder[]> {
-        return this._http.get(this._globalService.serviceHost + '/api/staticdata/getHoldersByEquityId/' + equityId)
+        return this._http.get(this._globalService.serviceHost + '/api/holdingsinfo/getHoldersByEquityId/' + equityId)
             .map(response => response.json())
             .catch(this.handleError);
     }
