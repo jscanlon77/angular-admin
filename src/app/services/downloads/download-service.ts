@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions, BrowserXhr } from '@angular/http';
-import * as saveAs from 'file-saver';
+import fileSaver from 'file-saver';
 import json2csv = require('json2csv');
 
 
@@ -28,7 +28,7 @@ export class DownloadService {
             var fileNameAndExtension = fileName + fileExtension;
             (blob, fileNameAndExtension);
 
-            saveAs(blob, fileNameAndExtension);
+            fileSaver.saveAs(blob, fileNameAndExtension);
             blob.msClose();
 
         } catch (e) {
@@ -70,8 +70,7 @@ export class DownloadService {
             var blob = new Blob([result], { type: actualContentType });
             var fileNameAndExtension = fileName + fileExtension;
             (blob, fileNameAndExtension);
-
-            filesaver.saveAs(blob, fileNameAndExtension);
+            fileSaver.saveAs(blob, fileNameAndExtension);
             blob.msClose();
 
         } catch (e) {

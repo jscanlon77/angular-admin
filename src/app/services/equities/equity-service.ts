@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions } from '@angular/http';
 import { GlobalService } from '../../globals'
+import { EquityTicker } from '../../model/equityTicker';
 
 @Injectable()
 export class EquityService {
@@ -15,8 +16,9 @@ export class EquityService {
       .catch(this.handleError);
   }
 
-  getEquityListByTerm(term:string, interval:string) {
+  getEquityListByTerm(term:string, interval:string) : Observable<EquityTicker[]> {
      return this._http.get(this._globalService.serviceHost + '/api/staticdata/equitytickersbyterm/' + term + '/' + interval)
+     .map(response => response.json())
      .catch(this.handleError);
   }
 

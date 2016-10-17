@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, NgModule } from '@angular/core';
 import { AutoCompleteModel } from '../../../../model/autoCompleteModel';
 import { InstitutionResultsModel } from '../../../../model/institutionResultsModel';
+import { EquityTicker } from '../../../../model/equityTicker';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { EquityService } from '../../../../services/equities/equity-service';
 import { Header, Footer } from 'primeng/primeng';
@@ -17,16 +18,16 @@ import { DownloadService } from '../../../../services/downloads/download-service
 
 export class CurrentAnalysis extends ReportingBase {
 
-  private results: AutoCompleteModel[];
+  results: EquityTicker[];
   private institutionResults: InstitutionResultsModel[] = new Array();
   private selectedInstitutions: InstitutionResultsModel[];
   private selectedEquityResult: AutoCompleteModel;
-  private equityModel: AutoCompleteModel;
+  equityModel: EquityTicker;
   private username: string;
   private showHolderPositions: boolean;
   private resultLimit: string = '30';
-  constructor(private _equityService: EquityService, 
-  private _localStorage: LocalStorageService, private _downloadService: DownloadService) {
+  constructor(private _equityService: EquityService,
+    private _localStorage: LocalStorageService, private _downloadService: DownloadService) {
 
     super();
     let loginDetails = this._localStorage.get('loginDetails');
@@ -45,9 +46,9 @@ export class CurrentAnalysis extends ReportingBase {
     with the isCalculable Equities.
   */
 
-  findEquityMatches(event) {
+  findEquityMatches(event) {    
     let equityValue = <string>event.query;
-    this._equityService.getEquityListByTerm(equityValue, this.resultLimit).subscribe(res => res => {
+    this._equityService.getEquityListByTerm(equityValue, this.resultLimit).subscribe(res => {
       this.results = res;
     })
   }
@@ -58,14 +59,19 @@ export class CurrentAnalysis extends ReportingBase {
 
   }
 
+  onRowUnselect(event) {
+    let selected = this.selectedInstitutions;
+  }
+
   onRowSelect(event) {
     let selected = this.selectedInstitutions;
   }
 
-  export(value)
-  {
-      var json = JSON.stringify(this.selectedInstitutions);
-      //this._downloadService.jsonToExcel(data:json, fileEx)
+  export(value) {
+    var json = JSON.stringify(this.selectedInstitutions);
+
+    // we need to popup a dialog box here and allow user to select a filename so that the download service can export it.
+    //this._downloadService.jsonToExcel(json, fileEx)
   }
 
 }
