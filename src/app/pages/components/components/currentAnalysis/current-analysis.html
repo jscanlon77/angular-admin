@@ -15,7 +15,7 @@
                 </div>
                 <p></p>
                 <div class="row">
-                    <p-dataTable #dt [value]="institutionResults" [(selection)]="selectInstitutions">
+                    <p-dataTable [value]="institutionResults" [(selection)]="selectedInstitutions" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" >
 
                         <header>Current Equity Institution Positions
                         </header>
