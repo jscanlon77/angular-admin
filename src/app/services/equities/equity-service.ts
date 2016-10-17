@@ -12,12 +12,12 @@ export class EquityService {
 
   getEquities(): Observable<any> {
     
-    return this._http.get(this._globalService.serviceHost + '/api/staticdata/equitytickers')
+    return this._http.get(this._globalService.serviceHost + '/api/equityinfo/equitytickers')
       .catch(this.handleError);
   }
 
   getEquityListByTerm(term:string, interval:string) : Observable<EquityTicker[]> {
-     return this._http.get(this._globalService.serviceHost + '/api/staticdata/equitytickersbyterm/' + term + '/' + interval)
+     return this._http.get(this._globalService.serviceHost + '/api/equityinfo/equitytickersbyterm/' + term + '/' + interval)
      .map(response => response.json())
      .catch(this.handleError);
   }

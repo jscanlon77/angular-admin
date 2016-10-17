@@ -9,19 +9,19 @@ import { ReportingBase } from '../../../../base/reportingBase';
 import { DownloadService } from '../../../../services/downloads/download-service'
 
 @Component({
-  selector: 'current-analysis',
+  selector: 'peer-positions',
   encapsulation: ViewEncapsulation.None,
   providers: [],
-  styles: [require('./current-analysis.scss'), require('./buttons.scss')],
-  template: require('./current-analysis.html')
+  styles: [require('./peer-positions.scss'), require('./buttons.scss')],
+  template: require('./peer-positions.html')
 })
 
-export class CurrentAnalysis extends ReportingBase {
+export class PeerPositions extends ReportingBase {
 
   results: EquityTicker[];
   private institutionResults: InstitutionResultsModel[] = new Array();
   private selectedInstitutions: InstitutionResultsModel[];
-  private selectedEquityResult: AutoCompleteModel;
+  private selectedEquityResult: EquityTicker;
   equityModel: EquityTicker;
   private username: string;
   private showHolderPositions: boolean;

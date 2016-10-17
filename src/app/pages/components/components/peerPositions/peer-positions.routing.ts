@@ -1,12 +1,12 @@
 import { Routes, RouterModule }  from '@angular/router';
 import { AuthorisationGuard } from '../../authorisation.guard';
-import { CurrentAnalysis } from './current-analysis.component';
+import { PeerPositions } from './peer-positions.component';
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
-    path: 'current-analysis', canActivate: [AuthorisationGuard],
-    component: CurrentAnalysis
+    path: 'peer-positions', canActivate: [AuthorisationGuard],
+    component: PeerPositions
   }
 ];
 

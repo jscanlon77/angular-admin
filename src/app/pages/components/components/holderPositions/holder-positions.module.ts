@@ -2,8 +2,8 @@ import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgaModule } from '../../theme/nga.module';
-import { routing }       from './current-analysis.routing';
-import { CurrentAnalysis } from './current-analysis.component';
+import { routing }       from './holder-positions.routing';
+import { HolderPositions } from './holder-positions.component';
 import { SplitButtonModule} from 'primeng/primeng';
 
 
@@ -17,7 +17,7 @@ import { SplitButtonModule} from 'primeng/primeng';
     routing
   ],
   declarations: [
-    CurrentAnalysis, ]
+    HolderPositions, ]
 })
-export default class CurrentAnalysisModule {
+export default class HolderPositionsModule {
 }

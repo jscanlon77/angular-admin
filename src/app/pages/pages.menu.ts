@@ -49,18 +49,18 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'current-analysis',
+            path: 'holder-positions',
             data: {
               menu: {
-                title: 'Current Analysis',
+                title: 'Holder Positions',
               }
             }
           },
           {
-            path: 'historicalReports',
+            path: 'peer-positions',
             data: {
               menu: {
-                title: 'SCF',
+                title: 'Peer Group Data',
               }
             }
           },
