@@ -15,6 +15,11 @@ export class RegistrationService {
       .catch(this.handleError);
   }
 
+  waitRedirect() : Observable<any> {
+     
+     return Observable.of(true);
+  }
+
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message

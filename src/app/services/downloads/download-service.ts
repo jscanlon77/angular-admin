@@ -69,7 +69,6 @@ export class DownloadService {
             let result = json2csv({ data: myCars, fields: fields })
             var blob = new Blob([result], { type: actualContentType });
             var fileNameAndExtension = fileName + fileExtension;
-            (blob, fileNameAndExtension);
             fileSaver.saveAs(blob, fileNameAndExtension);
             blob.msClose();
 

@@ -1,11 +1,11 @@
 <div class="widgets">
     <div class="row">
         <div class="col-md-7">
-            <ba-card title="Held Equity Positions" baCardClass="with-scroll button-panel" [style]="{'height':'300px'}">
+            <ba-card title="Held Equity Positions" [style]="{'height':'660px'}">
                 <div class="form-group row">
                     <label for="tickerSelect" class="col-sm-2 form-control-label">SELECT TICKER:</label>
                     <div class="col-sm-10">
-                        <p-autoComplete name="tickerSelect" (onSelect)="selectedEquity($event)" [(ngModel)]="equityModel" [suggestions]="results" (completeMethod)="findEquityMatches($event)" field="EquityName" placeholder="Enter ticker.." [style]="{'width':'450px'}">
+                        <p-autoComplete name="tickerSelect" (onSelect)="selectedEquity($event)" (onUnselect)="onUnselectEquity($event)" [(ngModel)]="equityModel" [suggestions]="results" (completeMethod)="findEquityMatches($event)" field="EquityName" placeholder="Enter ticker.." [style]="{'width':'450px'}">
                         </p-autoComplete>
                     </div>
                     
@@ -18,7 +18,7 @@
                 <div class="row" *ngIf="historicCheck">
                     <label class="col-sm-2 form-control-label">HISTORICAL PERIOD:</label>
                     <div class="col-sm-10">
-                       <p-dropdown [options]="tenors" [(ngModel)]="selectedTenor"></p-dropdown>
+                       <p-dropdown [options]="tenors" [(ngModel)]="selectedTenor" (onChange)="tenorChanged($event)"></p-dropdown>
                     </div>
                 </div>
                
@@ -29,14 +29,14 @@
                 </div>
                 <p></p>
                 <div class="row" *ngIf="showHolderPositions">
-                    <p-dataTable [value]="institutionResults" [(selection)]="selectedInstitutions" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" >
+                    <p-dataTable [value]="institutionResults" [(selection)]="selectedInstitutions" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [paginator]="true" [pageLinks]="7" [rowsPerPageOptions]="[5,10,20]" [rows]="20" >
 
                         <header>Holder Positions
                         </header>
                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                        <p-column field="_institutionName" header="Institution" [style]="{'textAlign':'left'}"></p-column>
-                        <p-column field="_position" header="Position" [style]="{'textAlign':'right'}"></p-column>
-                        <p-column field="_price" header="Price" [style]="{'textAlign':'right'}"></p-column>
+                        <p-column field="Institution.InstitutionName" header="Holder" [style]="{'textAlign':'left'}"></p-column>
+                        <p-column field="Position.AsOfDate" header="As Of Date" [style]="{'textAlign':'left'}"></p-column>
+                        <p-column field="Position.PositionValue" header="Position" [style]="{'textAlign':'right'}"></p-column>
                     </p-dataTable>
                 </div>
             </ba-card>

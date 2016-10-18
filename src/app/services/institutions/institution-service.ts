@@ -11,8 +11,8 @@ export class InstitutionService {
 
     }
 
-    getHoldersByEquityId(equityId: string): Observable<Holder[]> {
-        return this._http.get(this._globalService.serviceHost + '/api/holdingsinfo/getHoldersByEquityId/' + equityId)
+    getHoldersByEquityId(equityId: string, selectedTenorValue:string): Observable<Holder[]> {
+        return this._http.get(this._globalService.serviceHost + '/api/holdingsinfo/getHoldersByEquityId/' + equityId + '/' + selectedTenorValue)
             .map(response => response.json())
             .catch(this.handleError);
     }
@@ -21,6 +21,7 @@ export class InstitutionService {
 
         let tenors = new Array<SelectItem>();
         tenors.push({ label: 'Select Period', value: null });
+        tenors.push({ label: 'Current', value: "0" });
         tenors.push({ label: '3M', value: "-3" });
         tenors.push({ label: '6M', value: "-6" });
         tenors.push({ label: '9M', value: "-9" });

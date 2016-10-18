@@ -21,13 +21,14 @@ import { DownloadService } from '../../../../services/downloads/download-service
 export class HolderPositions extends ReportingBase {
 
   private results: EquityTicker[];
-  private selectedTenor: SelectItem;
+  private selectedTenor: string;
   private institutionResults: Holder[] = new Array();
   private selectedInstitutions: Holder[];
   private tenors: SelectItem[];
   private historicCheck: boolean;
   private startDate: string;
   private selectedEquityResult: EquityTicker;
+  private currentEquityId:string;
   private equityModel: EquityTicker;
   private username: string;
   private showHolderPositions: boolean;
@@ -43,7 +44,7 @@ export class HolderPositions extends ReportingBase {
     this.showHolderPositions = false;
 
     this.tenors = this._institutionService.getPeriods();
-    this.selectedTenor = this.tenors[0];
+    this.selectedTenor = this.tenors[0].value;
 
   }
 
@@ -61,9 +62,32 @@ export class HolderPositions extends ReportingBase {
     })
   }
 
+  tenorChanged(event) {
+    if (event.value !== null) {
+       this.institutionResults = [];
+       let selectedTenor = this.selectedTenor;
+       this._institutionService.getHoldersByEquityId(this.currentEquityId, selectedTenor).subscribe(resu => {
+
+        // and then load them all into the grid
+        for (let holderEntry of resu) {
+          this.institutionResults.push(holderEntry)
+        }
+      });
+
+    }
+  }
+
   historicCheckChanged(event) {
     if (!this.historicCheck) {
-      this.selectedTenor = this.tenors[0];
+      this.selectedTenor = this.tenors[0].value;
+      this.institutionResults = [];
+      this._institutionService.getHoldersByEquityId(this.currentEquityId, "0").subscribe(resu => {
+
+        // and then load them all into the grid
+        for (let holderEntry of resu) {
+          this.institutionResults.push(holderEntry)
+        }
+      });
     }
   }
 
@@ -77,10 +101,15 @@ export class HolderPositions extends ReportingBase {
       // we need to get the id and then get all the instititions which hold the equity
       // passing in the startdate and the end date if provided and if not just the 
       // equity id.
-      let equityId = event.EquityId;
+      this.currentEquityId = event.EquityId;
 
       this.institutionResults = [];
-      this._institutionService.getHoldersByEquityId(equityId).subscribe(resu => {
+
+      if (this.selectedTenor === null) {
+        this.selectedTenor = null;
+      }
+
+      this._institutionService.getHoldersByEquityId(this.currentEquityId, this.selectedTenor).subscribe(resu => {
 
         // and then load them all into the grid
         for (let holderEntry of resu) {
@@ -88,6 +117,10 @@ export class HolderPositions extends ReportingBase {
         }
       });
     }
+  }
+
+  onUnselectEquity(event) {
+    let unselect = event;
   }
 
   onRowUnselect(event) {
@@ -99,11 +132,12 @@ export class HolderPositions extends ReportingBase {
   }
 
   export(value) {
-    var json = JSON.stringify(this.selectedInstitutions);
+    var json = JSON.stringify(this.institutionResults);
+    // and we need to get the array of headers as well so that we can export to excel properly.
 
     // we need to popup a dialog box here and allow user to select a filename so that the download service can export it.
     // get me the current time so that we can append it to the date...
-    let currentDate = new Date().getMilliseconds;
+    let currentDate = new Date().getMilliseconds();
     this._downloadService.jsonToExcel(json, ".xlsx", "HoldingsDownload" + currentDate);
   }
 
