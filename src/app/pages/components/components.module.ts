@@ -8,7 +8,7 @@ import { Components } from './components.component';
 import { HolderPositions } from './components/holderPositions/holder-positions.component';
 import { PeerPositions } from './components/peerPositions/peer-positions.component';
 import { EquityService } from '../../services/equities/equity-service';
-import { InstitutionService } from '../../services/institutions/institution-service';
+import { PositionsService } from '../../services/institutions/positions-service';
 import { DownloadService } from '../../services/downloads/download-service'
 
 
@@ -35,7 +35,7 @@ import { DownloadService } from '../../services/downloads/download-service'
   providers: [
     EquityService,
     DownloadService,
-    InstitutionService
+    PositionsService
   ]
 })
 export default class ComponentsModule {}

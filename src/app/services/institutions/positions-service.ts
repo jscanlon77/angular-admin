@@ -3,18 +3,26 @@ import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions } from '@angular/http';
 import { GlobalService } from '../../globals'
 import { Holder } from '../../model/holder';
+import { PositionsMatrix} from '../../model/positionsMatrix';
 import { SelectItem } from 'primeng/primeng';
 
 @Injectable()
-export class InstitutionService {
+export class PositionsService {
     constructor(private _http: Http, private _globalService: GlobalService) {
 
     }
 
-    getHoldersByEquityId(equityId: string, selectedTenorValue:string): Observable<Holder[]> {
-        return this._http.get(this._globalService.serviceHost + '/api/holdingsinfo/getHoldersByEquityId/' + equityId + '/' + selectedTenorValue)
+    getCalculatedPositions(equityId: string, selectedTenorValue:string): Observable<Holder[]> {
+        return this._http.get(this._globalService.serviceHost + '/api/positionsinfo/getHoldersByEquityId/' + equityId + '/' + selectedTenorValue)
             .map(response => response.json())
             .catch(this.handleError);
+    }
+
+
+    getCalculatedPositionsMatrix(positionsMatrix:PositionsMatrix)
+    {
+        return this._http.post(this._globalService.serviceHost + '/api/positionsinfo/calculatedPositions', positionsMatrix)
+      .catch(this.handleError);
     }
 
     getPeriods(): Array<SelectItem> {

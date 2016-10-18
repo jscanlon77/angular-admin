@@ -4,7 +4,7 @@ import { EquityTicker } from '../../../../model/equityTicker';
 import { Holder } from '../../../../model/holder';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { EquityService } from '../../../../services/equities/equity-service';
-import { InstitutionService } from '../../../../services/institutions/institution-service';
+import { PositionsService } from '../../../../services/institutions/positions-service';
 import { Header, Footer, SelectItem } from 'primeng/primeng';
 import { ReportingBase } from '../../../../base/reportingBase';
 import { DownloadService } from '../../../../services/downloads/download-service'
@@ -36,14 +36,14 @@ export class HolderPositions extends ReportingBase {
   constructor(private _equityService: EquityService,
     private _localStorage: LocalStorageService,
     private _downloadService: DownloadService,
-    private _institutionService: InstitutionService) {
+    private _positionsService: PositionsService) {
 
     super();
     let loginDetails = this._localStorage.get('loginDetails');
     this.username = loginDetails['userName'];
     this.showHolderPositions = false;
 
-    this.tenors = this._institutionService.getPeriods();
+    this.tenors = this._positionsService.getPeriods();
     this.selectedTenor = this.tenors[0].value;
 
   }
@@ -66,7 +66,7 @@ export class HolderPositions extends ReportingBase {
     if (event.value !== null) {
       this.institutionResults = [];
       let selectedTenor = this.selectedTenor;
-      this._institutionService.getHoldersByEquityId(this.currentEquityId, selectedTenor).subscribe(resu => {
+      this._positionsService.getCalculatedPositions(this.currentEquityId, selectedTenor).subscribe(resu => {
 
         // and then load them all into the grid
         for (let holderEntry of resu) {
@@ -81,7 +81,7 @@ export class HolderPositions extends ReportingBase {
     if (!this.historicCheck) {
       this.selectedTenor = this.tenors[0].value;
       this.institutionResults = [];
-      this._institutionService.getHoldersByEquityId(this.currentEquityId, "0").subscribe(resu => {
+      this._positionsService.getCalculatedPositions(this.currentEquityId, "0").subscribe(resu => {
 
         // and then load them all into the grid
         for (let holderEntry of resu) {
@@ -109,7 +109,7 @@ export class HolderPositions extends ReportingBase {
         this.selectedTenor = null;
       }
 
-      this._institutionService.getHoldersByEquityId(this.currentEquityId, this.selectedTenor).subscribe(resu => {
+      this._positionsService.getCalculatedPositions(this.currentEquityId, this.selectedTenor).subscribe(resu => {
 
         // and then load them all into the grid
         for (let holderEntry of resu) {
@@ -134,7 +134,6 @@ export class HolderPositions extends ReportingBase {
   export(value) {
 
     let institutionResultsHeaders = ["InstitutionName", "PositionDate", "Position"];
-    //let jsonString = [{"InstitutionName":"Advanced Micro Devices, Inc.","PositionDate":"2016-10-18T00:00:00","Position":"23"},{"InstitutionName":"1st Source Corporation Investment Advisors, Inc.","PositionDate":"2016-10-17T00:00:00","Position":"-2060594340"}];
     let currentDate = new Date().getMilliseconds();
     this._downloadService.jsonToExcel(this.institutionResults, institutionResultsHeaders, ".csv", "HoldingsDownload" + currentDate);
   }
