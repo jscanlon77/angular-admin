@@ -1,6 +1,6 @@
 export interface Holder {
-    HolderName: string,
-    PositionDate : string,
+    InstitutionName: string,
+    AsOfDate : string,
     Position: string,
     TodaysPrice: number,
 }

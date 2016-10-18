@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HTTP_PROVIDERS, Http, Headers, RequestOptions, BrowserXhr } from '@angular/http';
-import fileSaver from 'file-saver';
+import { saveAs } from 'file-saver';
 import json2csv = require('json2csv');
 
 
@@ -26,9 +26,7 @@ export class DownloadService {
 
             var blob = new Blob([data], { type: actualContentType });
             var fileNameAndExtension = fileName + fileExtension;
-            (blob, fileNameAndExtension);
-
-            fileSaver.saveAs(blob, fileNameAndExtension);
+            saveAs(blob, fileNameAndExtension);
             blob.msClose();
 
         } catch (e) {
@@ -36,44 +34,25 @@ export class DownloadService {
         }
     }
 
-    jsonToExcel(data: any, fileExtension: string, fileName: string) {
+    jsonToExcel(fileJson: any, headers:any, fileExtension: string, fileName: string) {
         var actualContentType = "";
         switch (fileExtension) {
-            case '.xlsx':
-                actualContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8";
+            case '.csv':
+                actualContentType = "data:text/csv;charset=utf-8";
                 break;
-            case '.xls':
-                actualContentType = "application/ms-excel";
-                break;
+           
             default:
         }
         try {
 
-
-            var fields = ['car', 'price', 'color'];
-            var myCars = [
-                {
-                    "car": "Audi",
-                    "price": 40000,
-                    "color": "blue"
-                }, {
-                    "car": "BMW",
-                    "price": 35000,
-                    "color": "black"
-                }, {
-                    "car": "Porsche",
-                    "price": 60000,
-                    "color": "green"
-                }
-            ];
-            let result = json2csv({ data: myCars, fields: fields })
+            let result = json2csv({ data: fileJson, fields: headers })
             var blob = new Blob([result], { type: actualContentType });
             var fileNameAndExtension = fileName + fileExtension;
-            fileSaver.saveAs(blob, fileNameAndExtension);
-            blob.msClose();
+            saveAs(blob, fileNameAndExtension);
+            //blob.msClose();
 
         } catch (e) {
-
+            console.error(e);
         }
     }
 

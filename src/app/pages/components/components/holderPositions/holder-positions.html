@@ -24,7 +24,7 @@
                
                 <div class="row" *ngIf="showHolderPositions">
                     <div class="button-wrapper">
-                          <button type="button" class="btn btn-success btn-sm" (click)="export(institutionResults)" style="float:right">Export To Excel</button>
+                         <button type="button" class="btn btn-success btn-sm" (click)="export(institutionResults)" style="float:right">Export To Excel</button>
                      </div>
                 </div>
                 <p></p>
@@ -32,11 +32,12 @@
                     <p-dataTable [value]="institutionResults" [(selection)]="selectedInstitutions" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [paginator]="true" [pageLinks]="7" [rowsPerPageOptions]="[5,10,20]" [rows]="20" >
 
                         <header>Holder Positions
+                            
                         </header>
                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                        <p-column field="Institution.InstitutionName" header="Holder" [style]="{'textAlign':'left'}"></p-column>
-                        <p-column field="Position.AsOfDate" header="As Of Date" [style]="{'textAlign':'left'}"></p-column>
-                        <p-column field="Position.PositionValue" header="Position" [style]="{'textAlign':'right'}"></p-column>
+                        <p-column field="InstitutionName" header="Holder" [style]="{'textAlign':'left'}"></p-column>
+                        <p-column field="PositionDate" header="As Of Date" [style]="{'textAlign':'left'}"></p-column>
+                        <p-column field="Position" header="Position" [style]="{'textAlign':'right'}"></p-column>
                     </p-dataTable>
                 </div>
             </ba-card>

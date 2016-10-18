@@ -28,7 +28,7 @@ export class HolderPositions extends ReportingBase {
   private historicCheck: boolean;
   private startDate: string;
   private selectedEquityResult: EquityTicker;
-  private currentEquityId:string;
+  private currentEquityId: string;
   private equityModel: EquityTicker;
   private username: string;
   private showHolderPositions: boolean;
@@ -64,9 +64,9 @@ export class HolderPositions extends ReportingBase {
 
   tenorChanged(event) {
     if (event.value !== null) {
-       this.institutionResults = [];
-       let selectedTenor = this.selectedTenor;
-       this._institutionService.getHoldersByEquityId(this.currentEquityId, selectedTenor).subscribe(resu => {
+      this.institutionResults = [];
+      let selectedTenor = this.selectedTenor;
+      this._institutionService.getHoldersByEquityId(this.currentEquityId, selectedTenor).subscribe(resu => {
 
         // and then load them all into the grid
         for (let holderEntry of resu) {
@@ -132,13 +132,13 @@ export class HolderPositions extends ReportingBase {
   }
 
   export(value) {
-    var json = JSON.stringify(this.institutionResults);
-    // and we need to get the array of headers as well so that we can export to excel properly.
 
-    // we need to popup a dialog box here and allow user to select a filename so that the download service can export it.
-    // get me the current time so that we can append it to the date...
+    let institutionResultsHeaders = ["InstitutionName", "PositionDate", "Position"];
+    //let jsonString = [{"InstitutionName":"Advanced Micro Devices, Inc.","PositionDate":"2016-10-18T00:00:00","Position":"23"},{"InstitutionName":"1st Source Corporation Investment Advisors, Inc.","PositionDate":"2016-10-17T00:00:00","Position":"-2060594340"}];
     let currentDate = new Date().getMilliseconds();
-    this._downloadService.jsonToExcel(json, ".xlsx", "HoldingsDownload" + currentDate);
+    this._downloadService.jsonToExcel(this.institutionResults, institutionResultsHeaders, ".csv", "HoldingsDownload" + currentDate);
   }
+
+  
 
 }
