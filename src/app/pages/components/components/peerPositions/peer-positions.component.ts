@@ -18,13 +18,17 @@ import { DownloadService } from '../../../../services/downloads/download-service
 
 export class PeerPositions extends ReportingBase {
 
-  results: EquityTicker[];
+  private primaryResults: EquityTicker[];
+  private secondaryEquityResults: EquityTicker[];
   private institutionResults: InstitutionResultsModel[] = new Array();
   private selectedInstitutions: InstitutionResultsModel[];
-  private selectedEquityResult: EquityTicker;
-  equityModel: EquityTicker;
+  private selectedPrimaryEquityResult: EquityTicker;
+  private selectedSecondaryEquityResult : EquityTicker;
+  private primaryEquityModel: EquityTicker;
+  private secondaryEquityModel : EquityTicker;
   private username: string;
   private showHolderPositions: boolean;
+  private showSecondaryTickerSelect: boolean;
   private resultLimit: string = '30';
   constructor(private _equityService: EquityService,
     private _localStorage: LocalStorageService, private _downloadService: DownloadService) {
@@ -33,12 +37,7 @@ export class PeerPositions extends ReportingBase {
     let loginDetails = this._localStorage.get('loginDetails');
     this.username = loginDetails['userName'];
     this.showHolderPositions = false;
-
-    let institutionResult = new InstitutionResultsModel("something", 23.45, 345.45, "1");
-
-    this.institutionResults.push(institutionResult);
-    let institutionResult2 = new InstitutionResultsModel("something1", 23.45, 345.45, "1");
-    this.institutionResults.push(institutionResult2);
+    this.showSecondaryTickerSelect = false;
   }
 
   /*
@@ -46,18 +45,32 @@ export class PeerPositions extends ReportingBase {
     with the isCalculable Equities.
   */
 
-  findEquityMatches(event) {    
+  findPrimaryEquityMatches(event) {    
     let equityValue = <string>event.query;
     this._equityService.getEquityListByTerm(equityValue, this.resultLimit).subscribe(res => {
-      this.results = res;
+      this.primaryResults = res;
     })
   }
 
-  selectedEquity(value) {
-    this.selectedEquityResult = value;
+  findSecondaryEquityMatches(event) {    
+    let equityValue = <string>event.query;
+    this._equityService.getSecondaryEquityListByTerm(equityValue, this.resultLimit, this.selectedPrimaryEquityResult.EquityId).subscribe(res => {
+      this.secondaryEquityResults = res;
+    })
+  }
 
+  selectedPrimaryEquity(value) {
+    this.selectedPrimaryEquityResult = value;
+    this.showSecondaryTickerSelect = true;
 
   }
+
+  selectedSecondaryEquity(value)
+  {
+     this.selectedSecondaryEquityResult = value;
+  }
+
+
 
   onRowUnselect(event) {
     let selected = this.selectedInstitutions;
@@ -69,9 +82,10 @@ export class PeerPositions extends ReportingBase {
 
   export(value) {
     var json = JSON.stringify(this.selectedInstitutions);
-
-    // we need to popup a dialog box here and allow user to select a filename so that the download service can export it.
-    //this._downloadService.jsonToExcel(json, fileEx)
+    let institutionResultsHeaders = ["InstitutionName", "PositionDate", "Position"];
+    let customInstitutionResultsHeaders = ['InstitutionName', 'PositionDate', 'Position'];
+    let currentDate = new Date().getMilliseconds();
+    this._downloadService.jsonToExcel(this.institutionResults, institutionResultsHeaders, ".csv", "HoldingsDownload" + currentDate);
   }
 
 }

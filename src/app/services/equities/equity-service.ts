@@ -22,6 +22,13 @@ export class EquityService {
      .catch(this.handleError);
   }
 
+  getSecondaryEquityListByTerm(term:string, interval:string, primaryEquity:string) : Observable<EquityTicker[]>
+  {
+     return this._http.get(this._globalService.serviceHost + '/api/equityinfo/secondaryequitytickersbyterm/' + term + '/' + interval + '/' + primaryEquity)
+     .map(response => response.json())
+     .catch(this.handleError);
+  }
+
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message

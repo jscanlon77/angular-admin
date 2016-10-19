@@ -45,11 +45,10 @@ export class DownloadService {
         }
         try {
 
-            let result = json2csv({ data: fileJson, fields: headers })
+            let result = json2csv({ data: fileJson, fields: headers})
             var blob = new Blob([result], { type: actualContentType });
             var fileNameAndExtension = fileName + fileExtension;
             saveAs(blob, fileNameAndExtension);
-            //blob.msClose();
 
         } catch (e) {
             console.error(e);

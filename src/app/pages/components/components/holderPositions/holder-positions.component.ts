@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, NgModule } from '@angular/core';
-import { AutoCompleteModel } from '../../../../model/autoCompleteModel';
 import { EquityTicker } from '../../../../model/equityTicker';
 import { Holder } from '../../../../model/holder';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -26,6 +25,7 @@ export class HolderPositions extends ReportingBase {
   private selectedInstitutions: Holder[];
   private tenors: SelectItem[];
   private historicCheck: boolean;
+  private currentEquityTicker: string;
   private startDate: string;
   private selectedEquityResult: EquityTicker;
   private currentEquityId: string;
@@ -102,7 +102,7 @@ export class HolderPositions extends ReportingBase {
       // passing in the startdate and the end date if provided and if not just the 
       // equity id.
       this.currentEquityId = event.EquityId;
-
+      this.currentEquityTicker = event.EquityTickerRegion;
       this.institutionResults = [];
 
       if (this.selectedTenor === null) {
@@ -133,7 +133,32 @@ export class HolderPositions extends ReportingBase {
 
   export(value) {
 
-    let institutionResultsHeaders = ["InstitutionName", "PositionDate", "Position"];
+    //let institutionResultsHeaders = ["InstitutionName", "PositionDate", "Position"];
+    let customEquityHeader = "InstitutionName for " + this.currentEquityTicker;
+    let institutionResultsHeaders = [
+    
+    {
+      label: customEquityHeader, 
+      value: 'InstitutionName', 
+      default: 'NULL' 
+    },
+ 
+   
+    {
+      label: 'Position Date',
+      value: 'PositionDate', 
+      default: 'NULL' 
+    },
+    {
+      label: 'Position',
+      value: 'Position', 
+      default: 'NULL' 
+    },
+  ]
+
+
+    
+    let customInstitutionResultsHeaders = [customEquityHeader, 'PositionDate', 'Position'];
     let currentDate = new Date().getMilliseconds();
     this._downloadService.jsonToExcel(this.institutionResults, institutionResultsHeaders, ".csv", "HoldingsDownload" + currentDate);
   }
