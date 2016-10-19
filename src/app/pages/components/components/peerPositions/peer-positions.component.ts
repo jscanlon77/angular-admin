@@ -81,9 +81,32 @@ export class PeerPositions extends ReportingBase {
   }
 
   export(value) {
-    var json = JSON.stringify(this.selectedInstitutions);
-    let institutionResultsHeaders = ["InstitutionName", "PositionDate", "Position"];
-    let customInstitutionResultsHeaders = ['InstitutionName', 'PositionDate', 'Position'];
+
+    
+    let customEquityHeader = "InstitutionName";
+    let institutionResultsHeaders = [
+    
+    {
+      label: customEquityHeader, 
+      value: 'InstitutionName', 
+      default: 'NULL' 
+    },
+ 
+    {
+      label: 'Position Date',
+      value: 'PositionDate', 
+      default: 'NULL' 
+    },
+    {
+      label: 'Position',
+      value: 'Position', 
+      default: 'NULL' 
+    },
+  ]
+
+
+    
+    let customInstitutionResultsHeaders = ['Ticker', customEquityHeader, 'PositionDate', 'Position'];
     let currentDate = new Date().getMilliseconds();
     this._downloadService.jsonToExcel(this.institutionResults, institutionResultsHeaders, ".csv", "HoldingsDownload" + currentDate);
   }

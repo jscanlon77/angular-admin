@@ -26,6 +26,7 @@ export class HolderPositions extends ReportingBase {
   private tenors: SelectItem[];
   private historicCheck: boolean;
   private currentEquityTicker: string;
+  private showPositionDate: boolean;
   private startDate: string;
   private selectedEquityResult: EquityTicker;
   private currentEquityId: string;
@@ -64,6 +65,7 @@ export class HolderPositions extends ReportingBase {
 
   tenorChanged(event) {
     if (event.value !== null) {
+      this.showPositionDate = true;
       this.institutionResults = [];
       let selectedTenor = this.selectedTenor;
       this._positionsService.getCalculatedPositions(this.currentEquityId, selectedTenor).subscribe(resu => {
@@ -75,10 +77,14 @@ export class HolderPositions extends ReportingBase {
       });
 
     }
+    else {
+      this.showPositionDate = false;
+    }
   }
 
   historicCheckChanged(event) {
     if (!this.historicCheck) {
+      this.showPositionDate = false;
       this.selectedTenor = this.tenors[0].value;
       this.institutionResults = [];
       this._positionsService.getCalculatedPositions(this.currentEquityId, "0").subscribe(resu => {
@@ -88,7 +94,10 @@ export class HolderPositions extends ReportingBase {
           this.institutionResults.push(holderEntry)
         }
       });
+
+
     }
+
   }
 
   selectedEquity(event) {
@@ -133,36 +142,41 @@ export class HolderPositions extends ReportingBase {
 
   export(value) {
 
-    //let institutionResultsHeaders = ["InstitutionName", "PositionDate", "Position"];
+
     let customEquityHeader = "InstitutionName for " + this.currentEquityTicker;
     let institutionResultsHeaders = [
-    
-    {
-      label: customEquityHeader, 
-      value: 'InstitutionName', 
-      default: 'NULL' 
-    },
- 
-   
-    {
-      label: 'Position Date',
-      value: 'PositionDate', 
-      default: 'NULL' 
-    },
-    {
-      label: 'Position',
-      value: 'Position', 
-      default: 'NULL' 
-    },
-  ]
+
+      {
+        label: customEquityHeader,
+        value: 'InstitutionName',
+        default: 'NULL'
+      },
 
 
+      {
+        label: 'Position Date',
+        value: 'PositionDate',
+        default: 'NULL'
+      },
+      {
+        label: 'Position',
+        value: 'Position',
+        default: 'NULL'
+      },
+    ]
+
+    if (!this.showPositionDate) {
+       let elementOfArray = institutionResultsHeaders.find(p=>p.value == "PositionDate");
+       let index = institutionResultsHeaders.indexOf(elementOfArray);
+       institutionResultsHeaders.splice(index, 1);
+
+    }
+
     
-    let customInstitutionResultsHeaders = [customEquityHeader, 'PositionDate', 'Position'];
     let currentDate = new Date().getMilliseconds();
     this._downloadService.jsonToExcel(this.institutionResults, institutionResultsHeaders, ".csv", "HoldingsDownload" + currentDate);
   }
 
-  
+
 
 }

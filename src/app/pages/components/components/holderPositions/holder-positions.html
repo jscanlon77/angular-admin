@@ -35,9 +35,9 @@
                             
                         </header>
                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                        <p-column field="Ticker" header="Ticker" [style]="{'textAlign':'left'}"></p-column>
+                        <!--<p-column field="Ticker" header="Ticker" [style]="{'textAlign':'left'}"></p-column>-->
                         <p-column field="InstitutionName" header="Holder" [style]="{'textAlign':'left'}"></p-column>
-                        <p-column field="PositionDate" header="Position Date" [style]="{'textAlign':'left'}">
+                        <p-column field="PositionDate" *ngIf="showPositionDate" header="Position Date" [style]="{'textAlign':'left'}">
                             <template let-col let-car="rowData" pTemplate type="body">
                                 <span>{{car[col.field] | date: 'dd/MM/yyyy'}}</span>
                             </template>

@@ -15,6 +15,7 @@
                         <p-autoComplete [(ngModel)]="secondaryEquityModel" [suggestions]="secondaryEquityResults" (onSelect)="selectedSecondaryEquity($event)" (completeMethod)="findSecondaryEquityMatches($event)" field="EquityName" placeholder="Enter term.." [style]="{'width':'450px'}">
                         </p-autoComplete>
                     </div>
+                    <p-listbox [options]="cities" [(ngModel)]="selectedCity"></p-listbox>
                 </div>
                 <div class="row" *ngIf="showHolderPositions">
                     <div class="button-wrapper">
